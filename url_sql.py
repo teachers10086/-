@@ -18,18 +18,17 @@ class URL_SQL:
             pass
 
     def sql_get(self):
-        if not self.url_wei:
-            print("No URLs left to retrieve.")
-            return None
+        while self.url_wei:  # 循环直到找到一个未爬取的 URL
+            a = self.url_wei.pop()
 
-        a = self.url_wei.pop()
+            if a in self.url_yi:
+                print(f"{a} 已爬取！")
+            else:
+                self.url_yi.add(a)
+                return a
 
-        if a in self.url_yi:
-            print(f"{a} 已爬取！")
-        else:
-            self.url_yi.add(a)
-
-        return a
+        print("No URLs left to retrieve.")
+        return None
 
 
 if __name__ == '__main__':
